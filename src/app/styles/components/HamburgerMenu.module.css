@@ -1,0 +1,251 @@
+/* Hamburger Button */
+.hamburgerButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: white;
+  border: 1px solid #1a6aaa; /* subtle blue accent */
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 60;
+}
+
+.hamburgerButton:hover {
+  background: #f0f4f8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.hamburgerButton:active {
+  transform: translateY(0);
+}
+
+.menuIcon,
+.closeIcon {
+  color: #1a6aaa;
+  transition: all 0.3s ease;
+}
+
+.hamburgerOpen {
+  background: #e8f2fc !important;
+}
+
+/* Menu Container */
+.menuContainer {
+  position: absolute;
+  top: 60px; /* adjust according to header height */
+  left: 0;
+  width: 380px;
+  max-height: 85vh;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid #d0d7de;
+  animation: menuSlideIn 0.2s ease forwards;
+}
+
+@keyframes menuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Menu Header */
+.menuHeader {
+  background: white;
+  color: #111;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.menuHeader::after {
+  display: none; /* removed gradient line */
+}
+
+.menuTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+/* Menu Content */
+.menuContent {
+  padding: 16px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.menuContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menuContent::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 3px;
+}
+
+.menuContent::-webkit-scrollbar-thumb {
+  background: #1a6aaa;
+  border-radius: 3px;
+}
+
+.menuContent::-webkit-scrollbar-thumb:hover {
+  background: #0d4d80;
+}
+
+/* Category Buttons */
+.categoryButton {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  border: 1px solid #d0d7de;
+  padding: 14px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #111;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.categoryButton:hover {
+  background: #eef4fb;
+  border-color: #1a6aaa;
+  transform: translateX(2px);
+}
+
+.categoryArrow {
+  color: #1a6aaa;
+  transition: transform 0.3s ease;
+}
+
+.arrowRotated {
+  transform: rotate(180deg);
+}
+
+/* Category Items */
+.categoryItems {
+  margin-top: 8px;
+  padding-left: 12px;
+  border-left: 2px solid #eef4fb;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 4px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.menuItem:hover {
+  background: #eef4fb;
+  color: #0d4d80;
+  transform: translateX(2px);
+}
+
+.itemIcon {
+  font-size: 16px;
+  margin-right: 12px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.itemLabel {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Footer & User Section */
+.menuFooter {
+  border-top: 1px solid #e0e0e0;
+  background: #fafafa;
+  padding: 16px;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #d0d7de;
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  background: #1a6aaa;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  margin-right: 12px;
+}
+
+.userName {
+  font-weight: 600;
+  color: #111;
+  font-size: 14px;
+}
+
+.userRole {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.logoutButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #1a6aaa;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(26, 106, 170, 0.2);
+}
+
+.logoutButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(26, 106, 170, 0.3);
+}
+
+.logoutButton:active {
+  transform: translateY(0);
+}

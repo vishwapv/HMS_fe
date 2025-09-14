@@ -1,0 +1,100 @@
+:root {
+  --primary-blue: #2563eb;   /* Professional hospital blue */
+  --secondary-teal: #14b8a6; /* Medical teal */
+  --accent-amber: #f59e0b;   /* Minimal warm accent */
+  --background-light: #f9fafb;
+  --text-dark: #111827;
+}
+
+.header {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Hamburger container - stays on left */
+.header > div:first-child {
+  flex-shrink: 0; /* Don't shrink */
+  width: auto;
+}
+
+.logoContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* For logout button absolute positioning */
+}
+
+.logo {
+  background-color: var(--secondary-teal);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.logoTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.logout {
+  position: absolute;
+  right: 1rem;
+  background-color: white;           /* White background */
+  color: var(--text-dark);           /* Black text */
+  border: 1px solid var(--text-dark); /* Thin black border */
+  padding: 8px 16px;                 /* Comfortable padding */
+  border-radius: 8px;                /* Rounded corners */
+  font-weight: 600;                  /* Slightly bold text */
+  font-size: 14px;                   /* Medium font size */
+  cursor: pointer;                   /* Pointer on hover */
+  transition: all 0.2s ease-in-out;  /* Smooth hover transition */
+  margin-left: 16px;                 /* Spacing from logo */
+}
+
+.logout:hover {
+  background-color: var(--primary-blue); /* Accent color on hover */
+  color: white;                          /* White text on hover */
+  border-color: var(--primary-blue);     /* Match border to background */
+  transform: translateY(-1px);           /* Slight lift effect */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Subtle shadow */
+}
+
+.logout:active {
+  transform: translateY(0);             /* Reset on click */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Hamburger button wrapper */
+.hamburgerWrapper {
+  position: absolute;
+  left: 0rem;     /* Top-left corner */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+}
+
