@@ -1,172 +1,184 @@
-/* @import "tailwindcss";
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+/* app/globals.css */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* Reset default margins and padding */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-html {
-  margin: 0;
-  padding: 0;
-}
-
-
-/* Define custom colors using CSS variables */
+/* === SMH Brand Tokens === */
 :root {
-  --hospital-blue-50: #e8f2fc;
-  --hospital-blue-500: #1a6aaa;
-  --hospital-blue-700: #0d4d80;
-  --hospital-blue-900: #06355d;
-  --hospital-teal-500: #2a9d8f;
-  --hospital-teal-700: #1f7a6f;
-  --hospital-coral: #e76f51;
+  /* Core brand from logo */
+  --smh-teal-700: #0f8c92;
+  --smh-teal-600: #15a0a6; /* primary */
+  --smh-teal-500: #24b3b9;
+  --smh-teal-300: #7dd9dd;
+
+  --smh-gray-900: #2a2a2a;
+  --smh-gray-800: #4c4c4c;
+  --smh-gray-700: #6a6a6a;  /* logo ring */
+  --smh-gray-500: #8a8a8a;
+  --smh-gray-300: #cbd2d9;
+  --smh-gray-200: #e6e6e6;
+  --smh-gray-100: #f2f3f5;
+  --smh-gray-50:  #f7f8fa;
+
+  /* Theme */
+  --bg: var(--smh-gray-50);
+  --surface: #ffffff;
+  --elevated: #ffffff;
+  --text: var(--smh-gray-900);
+  --muted: #6b7280;
+  --primary: var(--smh-teal-600);
+  --secondary: var(--smh-gray-700);
+  --primary-contrast: #ffffff;
+  --border: var(--smh-gray-300);
+  --ring: var(--smh-teal-300);
+  --link: var(--smh-teal-600);
+  --success: #12a57a;
+  --warning: #f6b73c;
+  --danger: #ef6b6b;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 10px 30px rgba(16,24,40,.12);
+  --shadow-lg: 0 20px 50px rgba(16,24,40,.18);
+
+  --header-h: 64px;
 }
 
-/* Create custom utility classes as fallback */
-.hospital-bg-blue-50 { background-color: var(--hospital-blue-50); }
-.hospital-bg-blue-500 { background-color: var(--hospital-blue-500); }
-.hospital-bg-blue-700 { background-color: var(--hospital-blue-700); }
-.hospital-bg-blue-900 { background-color: var(--hospital-blue-900); }
-.hospital-bg-teal-500 { background-color: var(--hospital-teal-500); }
-.hospital-bg-teal-700 { background-color: var(--hospital-teal-700); }
-.hospital-bg-coral { background-color: var(--hospital-coral); }
-
-.hospital-text-blue-50 { color: var(--hospital-blue-50); }
-.hospital-text-blue-500 { color: var(--hospital-blue-500); }
-.hospital-text-blue-700 { color: var(--hospital-blue-700); }
-.hospital-text-blue-900 { color: var(--hospital-blue-900); }
-.hospital-text-teal-500 { color: var(--hospital-teal-500); }
-.hospital-text-teal-700 { color: var(--hospital-teal-700); }
-.hospital-text-coral { color: var(--hospital-coral); }
-
-.hospital-border-blue-500 { border-color: var(--hospital-blue-500); }
-.hospital-border-teal-500 { border-color: var(--hospital-teal-500); }
-.hospital-border-coral { border-color: var(--hospital-coral); }
-
-/* Manual utility classes as fallback if Tailwind doesn't work */
-/* Spacing */
-.p-1 { padding: 0.25rem; }
-.p-2 { padding: 0.5rem; }
-.p-3 { padding: 0.75rem; }
-.p-4 { padding: 1rem; }
-.p-5 { padding: 1.25rem; }
-.p-6 { padding: 1.5rem; }
-.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
-.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
-.px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
-.px-4 { padding-left: 1rem; padding-right: 1rem; }
-.px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
-.m-2 { margin: 0.5rem; }
-.m-3 { margin: 0.75rem; }
-.m-4 { margin: 1rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-3 { margin-bottom: 0.75rem; }
-.mb-4 { margin-bottom: 1rem; }
-.mb-5 { margin-bottom: 1.25rem; }
-.mb-6 { margin-bottom: 1.5rem; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-3 { margin-top: 0.75rem; }
-.mt-4 { margin-top: 1rem; }
-.ml-2 { margin-left: 0.5rem; }
-.ml-3 { margin-left: 0.75rem; }
-.mr-2 { margin-right: 0.5rem; }
-.mr-3 { margin-right: 0.75rem; }
-
-/* Flexbox */
-.flex { display: flex; }
-.flex-col { flex-direction: column; }
-.items-center { align-items: center; }
-.justify-between { justify-content: space-between; }
-.justify-center { justify-content: center; }
-.justify-end { justify-content: flex-end; }
-.flex-1 { flex: 1; }
-
-/* Text */
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-.font-bold { font-weight: 700; }
-.font-semibold { font-weight: 600; }
-.font-medium { font-weight: 500; }
-.text-sm { font-size: 0.875rem; }
-.text-base { font-size: 1rem; }
-.text-lg { font-size: 1.125rem; }
-.text-xl { font-size: 1.25rem; }
-.text-2xl { font-size: 1.5rem; }
-
-/* Colors */
-.text-white { color: white; }
-.bg-white { background-color: white; }
-.bg-gray-50 { background-color: #f8f9fa; }
-.bg-gray-100 { background-color: #f1f3f5; }
-.bg-gray-200 { background-color: #e9ecef; }
-
-/* Borders */
-.rounded { border-radius: 0.25rem; }
-.rounded-md { border-radius: 0.375rem; }
-.rounded-lg { border-radius: 0.5rem; }
-.rounded-xl { border-radius: 0.75rem; }
-.border { border-width: 1px; }
-.border-0 { border-width: 0; }
-
-/* Shadows */
-.shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
-.shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
-.shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
-
-/* Custom component classes - manual versions if @apply doesn't work */
-.btn-hospital-primary {
-  background-color: var(--hospital-blue-500);
-  color: white;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.2s;
+/* Optional dark theme */
+html[data-theme="dark"] {
+  --bg: #0e1116;
+  --surface: #11151b;
+  --elevated: #151a22;
+  --text: #e7e9ee;
+  --muted: #9aa3af;
+  --border: #262b34;
+  --link: #5fd7df;
+  --ring: #2aaeb5;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.45);
+  --shadow-md: 0 12px 30px rgba(0,0,0,.45);
+  --shadow-lg: 0 24px 60px rgba(0,0,0,.55);
 }
 
-.btn-hospital-primary:hover {
-  background-color: var(--hospital-blue-700);
-}
-
-.btn-hospital-secondary {
-  background-color: var(--hospital-teal-500);
-  color: white;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.2s;
-}
-
-.btn-hospital-secondary:hover {
-  background-color: var(--hospital-teal-700);
-}
-
-.card-hospital {
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  padding: 1.5rem;
-  border: 1px solid #f1f3f5;
-}
-
-/* Base styles */
+/* === Reset + Base === */
+*,*::before,*::after { box-sizing: border-box; }
+html,body { padding:0; margin:0; height:100%; }
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-  background-color: #f8f9fa;
-  color: #343a40;
-  line-height: 1.6;
-} 
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { max-width: 100%; display: block; }
+
+/* Utilities */
+.container { width: min(1200px, 92vw); margin-inline:auto; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.btn {
+  display:inline-flex; align-items:center; gap:.5rem;
+  border-radius: 999px; padding:.6rem 1rem; font-weight:600;
+  border:1px solid transparent; cursor:pointer;
+}
+.btn-primary { background: var(--primary); color: var(--primary-contrast); }
+.btn-primary:hover { filter: brightness(0.95); }
+.btn-ghost { background: transparent; color: var(--text); border-color: transparent; }
+.btn-outline-secondary { background: transparent; color: var(--secondary); border-color: var(--secondary); }
+.badge { border-radius:999px; padding:.2rem .6rem; font-size:.75rem; background: var(--smh-gray-100); color: var(--smh-gray-800);}
+
+.text-secondary { color: var(--secondary) !important; }
+.border-secondary { border-color: var(--secondary) !important; }
+.bg-subtle { background: var(--smh-gray-50) !important; }
+
+/* Focus ring */
+:focus-visible { outline: 3px solid color-mix(in oklab, var(--ring), white 16%); outline-offset: 2px; }
+
+/* === Header & Navigation === */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--header-h);
+  background: linear-gradient(180deg, rgba(247,248,250,.95), rgba(255,255,255,.8));
+  backdrop-filter: saturate(160%) blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner { height: 100%; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-inline: 4vw; }
+
+.brand { display:flex; align-items:center; gap:.75rem; font-weight:800; letter-spacing:.3px; }
+.brand-img { border-radius: 50%; background:#fff; }
+.brand-text { font-size: 1.15rem; color: var(--secondary); }
+.brand-sub { font-size:.72rem; color: var(--smh-teal-600); margin-top:-6px; }
+
+.nav-desktop { display:none; align-items:center; gap: .75rem; }
+.nav-desktop > .nav-item {
+  position: relative;
+  padding: .55rem .8rem; border-radius: 10px; color: var(--secondary); font-weight:600;
+}
+.nav-desktop > .nav-item:hover { background: var(--smh-gray-100); }
+
+/* Dropdown on desktop */
+.nav-desktop .dropdown:hover .dropdown-panel { display:block; }
+.dropdown-panel {
+  display:none; position:absolute; top: 100%; left: 0; margin-top:.5rem;
+  min-width: 260px; background: var(--elevated);
+  border:1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow-lg); padding:.6rem;
+}
+.dropdown-grid { display:grid; grid-template-columns: 1fr; gap:.25rem; }
+.dropdown-link {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:.55rem .65rem; border-radius: 10px; color: var(--text);
+}
+.dropdown-link:hover { background: var(--smh-gray-100); }
+
+/* Hamburger + Drawer */
+.hamburger {
+  width: 40px; height: 40px; border-radius: 10px; border:1px solid var(--border);
+  display:grid; place-items:center; background: var(--surface);
+}
+.hamburger span, .hamburger::before, .hamburger::after {
+  content:""; display:block; width:22px; height:2px; background: var(--secondary); transition:.25s transform, .25s opacity;
+}
+.hamburger::before { transform: translateY(-6px); }
+.hamburger::after  { transform: translateY(6px); }
+.hamburger[aria-expanded="true"] span { opacity: 0; }
+.hamburger[aria-expanded="true"]::before { transform: translateY(0) rotate(45deg); }
+.hamburger[aria-expanded="true"]::after  { transform: translateY(0) rotate(-45deg); }
+
+.drawer-backdrop {
+  position:fixed; inset:0; background: rgba(0,0,0,.32); opacity:0; pointer-events:none; transition: .25s opacity;
+}
+.drawer {
+  position:fixed; inset:0 0 0 auto; width:min(88vw, 380px);
+  transform: translateX(100%);
+  background: var(--elevated); border-left:1px solid var(--border);
+  box-shadow: var(--shadow-lg); display:flex; flex-direction:column; height:100%;
+  transition: .25s transform;
+}
+.drawer.open { transform:translateX(0); }
+.drawer-backdrop.open { opacity:1; pointer-events:auto; }
+
+.drawer-header { display:flex; align-items:center; justify-content:space-between; padding:1rem; border-bottom:1px solid var(--border); }
+.drawer-body { overflow:auto; padding:.25rem 1rem 1rem; }
+
+/* Nested menu (mobile) */
+.menu { list-style:none; padding:0; margin:.25rem 0; }
+.menu .item { margin:.1rem 0; }
+.menu .btn-row {
+  display:flex; align-items:center; justify-content:space-between;
+  width:100%; padding:.75rem .8rem; border-radius:12px; border:1px solid var(--border);
+  background: var(--surface); color: var(--text); font-weight:600;
+}
+.menu .btn-row:hover { background: var(--smh-gray-100); }
+.menu .children { margin-left:.75rem; padding-left:.5rem; border-left: 2px dashed var(--smh-gray-200); margin-top:.35rem; }
+.chev { transition:.2s transform; }
+.chev.open { transform: rotate(90deg); }
+
+/* Responsive */
+@media (min-width: 1024px) {
+  .nav-desktop { display:flex; }
+  .hamburger { display:none; }
+}

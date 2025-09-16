@@ -1,51 +1,164 @@
+// src/components/Header.tsx
 "use client";
 
-import { useState } from 'react';
-import Image from 'next/image';
-import { MenuItem } from '../../../../types';
-import HamburgerMenu from './HamburgerMenu';
-import styles from '../../styles/components/Header.module.css';
-import hospitalLogo from '../../icons/WhatsApp Image 2025-08-30 at 10.16.31 PM.jpeg';
+import Link from "next/link";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import type { MenuItem } from "../../../../types/index";
+import { NestedMenu } from "./NestedHamburger";
 
-interface HeaderProps {
-  menuItems?: MenuItem[];
-}
+const MENU: MenuItem[] = [
+  {
+    label: "Clinical",
+    children: [
+      { label: "OPD / Outpatient", href: "/opd" },
+      { label: "Admissions", href: "/admissions" },
+      { label: "Inpatient Rounds", href: "/ipd" },
+      { label: "Pharmacy", href: "/pharmacy" },
+      { label: "Laboratory", href: "/lab" },
+      { label: "Radiology / PACS", href: "/pacs" },
+    ],
+  },
+  {
+    label: "Administration",
+    children: [
+      { label: "Appointments", href: "/appointments" },
+      { label: "Queue & Triage", href: "/queue" },
+      { label: "Bed Management", href: "/beds" },
+      { label: "Billing & Insurance", href: "/billing" },
+      { label: "Discharge", href: "/discharge" },
+    ],
+  },
+  {
+    label: "People",
+    children: [
+      { label: "Patients", href: "/patients" },
+      { label: "Doctors", href: "/doctors" },
+      { label: "Nurses", href: "/nurses" },
+      { label: "Staff", href: "/staff" },
+    ],
+  },
+  {
+    label: "Insights",
+    children: [
+      { label: "Dashboards", href: "/analytics" },
+      { label: "Reports", href: "/reports" },
+      { label: "Audit Logs", href: "/audit" },
+    ],
+  },
+];
 
-const Header: React.FC<HeaderProps> = ({ menuItems = [] }) => {
-  const [activePage, setActivePage] = useState<string>('');
-  const handleMenuItemClick = (href: string) => {
-    setActivePage(href);
-    console.log('Menu item clicked:', href);
-    // Add navigation logic here
-  };
+export default function Header() {
+  const [open, setOpen] = useState(false);
+  const toggle = () => setOpen((v) => !v);
+  const close = () => setOpen(false);
 
+  useEffect(() => {
+    const onEsc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onEsc);
+    return () => window.removeEventListener("keydown", onEsc);
+  }, []);
 
   return (
-    <div className={styles.header}>
-      {/* Hamburger button */}
-      <div className={styles.hamburgerWrapper}>
-        <HamburgerMenu menuItems={menuItems} onMenuItemClick={handleMenuItemClick} />
-      </div>
-
-      {/* Centered Logo & Title */}
-      <div className={styles.logoContainer}>
-        <div className={styles.logoTitle}>
-          <h1 className={styles.title}>Swasthya Multi Speciality Hospital</h1>
+    <header className="site-header">
+      <div className="header-inner">
+        <Link href="/" className="brand" aria-label="SMH Home">
           <Image
-            src={hospitalLogo}
-            alt="Hospital logo"
-            width={90}
-            height={90}
-            className={styles.logo}
+            src="/smh-logo.jpeg"
+            alt="SMH logo"
+            width={36}
+            height={36}
+            className="brand-img"
             priority
           />
-        </div>
+          <div>
+            <div className="brand-text">SMH</div>
+            <div className="brand-sub">Where Care Meets Excellence</div>
+          </div>
+        </Link>
 
-        {/* Logout button at right */}
-        <button className={styles.logout}>Logout</button>
+        {/* Desktop nav */}
+        <nav className="nav-desktop" aria-label="Primary">
+          {MENU.map((m) =>
+            m.children ? (
+              <div className="dropdown nav-item" key={m.label}>
+                <span>{m.label}</span>
+                <div className="dropdown-panel" role="menu">
+                  <div className="dropdown-grid">
+                    {m.children.map((c) => (
+                      <Link
+                        key={c.label}
+                        href={c.href ?? "#"}
+                        className="dropdown-link"
+                      >
+                        <span>{c.label}</span>
+                        <span aria-hidden>›</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Link className="nav-item" key={m.label} href={m.href ?? "#"}>
+                {m.label}
+              </Link>
+            )
+          )}
+          <Link href="/login" className="btn btn-outline-secondary">
+            Sign in
+          </Link>
+        </nav>
+
+        {/* Mobile hamburger */}
+        <button
+          className="hamburger"
+          aria-label="Open menu"
+          aria-expanded={open}
+          aria-controls="mobile-drawer"
+          onClick={toggle}
+        >
+          <span />
+        </button>
       </div>
-    </div>
-  );
-};
 
-export default Header;
+      {/* Drawer + backdrop */}
+      <div
+        className={`drawer-backdrop ${open ? "open" : ""}`}
+        onClick={close}
+        aria-hidden={!open}
+      />
+      <aside
+        id="mobile-drawer"
+        className={`drawer ${open ? "open" : ""}`}
+        aria-hidden={!open}
+      >
+        <div className="drawer-header">
+          <div className="brand" style={{ gap: ".5rem" }}>
+            <Image
+              src="/smh-logo.jpeg"
+              alt="SMH"
+              width={28}
+              height={28}
+              className="brand-img"
+            />
+            <div className="brand-text">SMH Menu</div>
+          </div>
+          <button className="btn btn-ghost" onClick={close} aria-label="Close menu">
+            ✕
+          </button>
+        </div>
+        <div className="drawer-body">
+          <NestedMenu items={MENU} onNavigate={close} />
+          <div style={{ marginTop: "1rem", display: "flex", gap: ".5rem" }}>
+            <Link href="/login" className="btn btn-primary" onClick={close}>
+              Sign in
+            </Link>
+            <Link href="/contact" className="btn btn-ghost" onClick={close}>
+              Contact
+            </Link>
+          </div>
+        </div>
+      </aside>
+    </header>
+  );
+}
