@@ -1,14 +1,16 @@
-export default function HomePage(){
-  return (
-    <main className="container" style={{padding:"28px 0"}}>
-      <div className="card" style={{padding:"2rem", textAlign:"center"}}>
-        <h1 style={{margin:"0 0 .5rem", fontSize:"2rem"}}>SMH Hospital Management System</h1>
-        <p style={{color:"var(--muted)", margin:0}}>Where Care Meets Excellence</p>
-        <div style={{marginTop:"1.25rem", display:"flex", gap:".65rem", justifyContent:"center"}}>
-          <a className="btn btn-primary" href="/login">Sign in</a>
-          <a className="btn btn-outline-secondary" href="/patients">Quick Patients</a>
-        </div>
-      </div>
-    </main>
-  );
+// src/app/page.tsx
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+export default function HomeRedirect() {
+  const router = useRouter();
+  useEffect(() => {
+    const role = typeof window !== "undefined" ? localStorage.getItem("smh_role") : null;
+    if (role === "admin") router.replace("/dashboard/admin");
+    else if (role === "pharmacy") router.replace("/dashboard/pharmacy");
+    else router.replace("/dashboard/reception"); // default receptionist
+  }, [router]);
+  return null;
 }

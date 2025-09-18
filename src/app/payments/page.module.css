@@ -1,0 +1,59 @@
+.page { padding-block: 16px; }
+.h1   { font-size: clamp(26px, 3vw, 36px); margin: 8px 0 16px; }
+
+.grid { display: grid; grid-template-columns: 2fr 1.3fr; gap: 16px; }
+@media (max-width: 1024px) { .grid { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+}
+
+.row { margin-top: 10px; }
+.label { font-weight: 700; color: var(--secondary); margin-bottom: 6px; display:block; }
+
+.split2 { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.split3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.split4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; }
+@media (max-width: 900px) { .split3, .split4 { grid-template-columns: 1fr; } }
+
+.input, .select, .textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 12px;
+  padding: .7rem .9rem;
+  outline: none;
+}
+.input:focus, .select:focus, .textarea:focus { box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring), white 70%); }
+.textarea { min-height: 90px; resize: vertical; }
+
+.pill {
+  display: inline-flex; align-items: center; gap: .5rem;
+  border: 1px solid var(--smh-teal-300);
+  color: var(--smh-teal-700);
+  background: color-mix(in oklab, var(--smh-teal-300), white 88%);
+  border-radius: 999px; padding: .35rem .7rem;
+}
+
+.headerRow{ display:flex; justify-content:space-between; align-items:center; margin-bottom:.3rem; }
+.subtle { color: var(--muted); font-size:.92rem; }
+
+.table {
+  width: 100%; border-collapse: collapse; margin-top: 10px; font-size: .95rem;
+}
+.table th, .table td { border-bottom: 1px solid var(--border); padding: .6rem .4rem; text-align: left; }
+.table tr:hover { background: var(--smh-gray-100); }
+
+.btnRow { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.badgeLink {
+  font-weight: 700; color: var(--link); text-decoration: none;
+}
+.badgeLink:hover { text-decoration: underline; }
+
+.invalid { border-color: var(--danger) !important; }
+.error { color: var(--danger); font-size:.85rem; margin-top: .25rem; }

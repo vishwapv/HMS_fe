@@ -1,0 +1,28 @@
+.page { padding-block: 16px; }
+.h1 { font-size: clamp(26px,3vw,36px); margin: 8px 0 16px; }
+
+.toolbar {
+  display:flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px;
+}
+.input, .select {
+  height: 38px; padding: 0 .75rem; border:1px solid var(--border); border-radius: 10px; background: var(--surface);
+}
+.btn { display:inline-flex; align-items:center; gap:.5rem; border-radius:999px; padding:.55rem 1rem; border:1px solid var(--border); background: var(--surface); }
+.btnPrimary { background: var(--primary); color:#fff; border-color: var(--primary); }
+.btnGhost { background: transparent; border-color: transparent; }
+
+.grid {
+  display:grid; grid-template-columns: 1fr; gap: 12px;
+}
+.card {
+  background: var(--surface); border:1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 12px;
+}
+
+.table { width:100%; border-collapse: collapse; }
+.table th, .table td { padding:.6rem .5rem; border-bottom: 1px solid var(--border); text-align:left; }
+.table th { color: var(--secondary); font-weight:700; }
+
+.kpis { display:flex; gap: 10px; flex-wrap: wrap; }
+.kpi { background: var(--smh-gray-50); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
+.kpi .title { color: var(--secondary); font-weight: 700; }
+.kpi .value { font-size: 20px; font-weight: 800; color: var(--smh-teal-700); }

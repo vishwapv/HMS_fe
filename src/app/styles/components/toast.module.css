@@ -1,0 +1,49 @@
+/* src/components/ui/toast.module.css */
+.wrap {
+  position: fixed;
+  z-index: 9999;
+  right: clamp(12px, 3vw, 28px);
+  bottom: clamp(12px, 3vw, 24px);
+  display: grid;
+  gap: .5rem;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: .6rem;
+  min-width: min(92vw, 420px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  padding: .8rem .9rem;
+  animation: slideIn .18s ease-out;
+}
+@keyframes slideIn {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+.icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center;
+  color: #fff; font-weight: 900;
+}
+.icon.success { background: var(--success); }
+.icon.error   { background: var(--danger); }
+.icon.info    { background: var(--primary); }
+.icon.warning { background: var(--warning); color: #111; }
+
+.title { font-weight: 800; color: var(--secondary); margin: 0; }
+.desc  { margin-top: 2px; color: var(--muted); font-size: .92rem; }
+
+.close {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 999px;
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  cursor: pointer;
+}

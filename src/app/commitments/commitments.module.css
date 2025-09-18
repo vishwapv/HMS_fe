@@ -1,0 +1,63 @@
+/* src/app/commitments/commitments.module.css */
+
+.page {
+  min-height: calc(100dvh - var(--header-h));
+  padding: 16px 0 64px;
+}
+
+.wrap {
+  width: 100%;
+  padding-inline: clamp(12px, 3vw, 40px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1rem;
+}
+.card {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.h1 { margin: 0 0 .75rem; color: var(--secondary); }
+
+.row { display: grid; gap: .6rem; margin-bottom: .75rem; }
+.label { font-size: .85rem; color: var(--muted); }
+.input, .select, .textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  padding: .65rem .8rem;
+  font: inherit;
+  color: var(--text);
+}
+.textarea { min-height: 100px; resize: vertical; }
+
+.actions { display: flex; gap: .5rem; align-items: center; }
+.btnPrimary { composes: btn btn-primary from global; }
+.btnGhost { composes: btn btn-ghost from global; border: 1px solid var(--border); }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th, .table td {
+  border-bottom: 1px solid var(--border);
+  padding: .6rem .5rem;
+  text-align: left;
+}
+.badge {
+  border-radius: 999px;
+  padding: .15rem .5rem;
+  font-size: .75rem;
+  color: var(--smh-gray-800);
+  background: var(--smh-gray-100);
+}
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; }
+}

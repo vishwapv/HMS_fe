@@ -72,7 +72,14 @@ a:hover { text-decoration: underline; }
 img { max-width: 100%; display: block; }
 
 /* Utilities */
-.container { width: min(1200px, 92vw); margin-inline:auto; }
+/* .container { width: min(1200px, 92vw); margin-inline:auto; }
+ */
+ .container {
+  width: 100%;
+  max-width: none;
+  margin: 0; /* no side gutters */
+  padding-inline: clamp(12px, 3vw, 40px); /* nice responsive side padding */
+ }
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -181,4 +188,20 @@ img { max-width: 100%; display: block; }
 @media (min-width: 1024px) {
   .nav-desktop { display:flex; }
   .hamburger { display:none; }
+}
+
+/* === Full-bleed utility ============================================== */
+/* Lets a section break out of a centered .container and use full width. */
+.full-bleed {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* Optional: subtle padding for full-bleed pages */
+.full-bleed > .page-wrap {
+  padding-inline: clamp(12px, 3vw, 40px);
 }

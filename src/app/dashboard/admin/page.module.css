@@ -1,0 +1,20 @@
+/* Reuse reception styles */
+@import "../reception/page.module.css";
+
+/* Filter bar */
+.filters {
+  display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 16px;
+}
+.fbtn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: .4rem .8rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+.fbtn[aria-pressed="true"] {
+  background: var(--smh-teal-600);
+  color: #fff;
+  border-color: var(--smh-teal-600);
+}

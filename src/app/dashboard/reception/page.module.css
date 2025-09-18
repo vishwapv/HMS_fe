@@ -1,0 +1,44 @@
+.page { padding-block: 16px; }
+.h1 { font-size: clamp(26px, 3vw, 36px); margin: 8px 0 16px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+}
+.kpi { display:grid; gap:6px; }
+.kpiTitle { color: var(--secondary); font-weight: 700; }
+.kpiValue { font-size: 28px; font-weight: 800; color: var(--smh-teal-700); }
+
+.span3 { grid-column: span 3; }
+.span4 { grid-column: span 4; }
+.span6 { grid-column: span 6; }
+.span12 { grid-column: 1 / -1; }
+
+@media (max-width: 1100px) {
+  .span3, .span4, .span6 { grid-column: span 12; }
+}
+
+/* horizontal bars */
+.barRow { display:flex; align-items:center; gap:10px; margin: 6px 0; }
+.barKey { width: 90px; color: var(--secondary); font-weight: 600; }
+.bar {
+  flex:1; height: 12px; border-radius: 999px;
+  background: var(--smh-gray-100); overflow: hidden;
+}
+.barFill {
+  height: 100%; background: var(--primary);
+  border-radius: 999px; transition: width .3s;
+}
+
+/* simple table */
+.table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.table th, .table td { text-align:left; border-bottom:1px solid var(--border); padding:.55rem .4rem; }
+.table th { color: var(--secondary); font-weight:700; }

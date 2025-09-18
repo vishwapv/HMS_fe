@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import { login } from "../../lib/api";
+import { login, setSession } from "../../lib/api";
 import s from "./login.module.css";
+const hosptial_logo = require("../../../public/WhatsApp Image 2025-08-30 at 10.16.31 PM (1).jpeg")
 
-const logo = require("../../../public/WhatsApp Image 2025-08-30 at 10.16.31 PM (1).jpeg")
 
 export default function LoginPage() {
   const router = useRouter();
@@ -22,11 +22,10 @@ export default function LoginPage() {
     setLoading(true);
     setErr(null);
     try {
-      const res = await login({ email, password }); // { token, role }
-      if (remember && typeof window !== "undefined") {
-        localStorage.setItem("smh_token", res.token);
-        localStorage.setItem("smh_role", res.role);
-      }
+      // DO NOT hash on client; backend does sha256
+      const res = await login({ email, password }); // posts to Endpoints.login
+      const role = res.role || "admin"; // backend returns role
+      if (remember) setSession(role, res.token, res.refreshToken);
       router.push("/");
     } catch (e: any) {
       setErr(e?.message || "Sign in failed");
@@ -40,7 +39,7 @@ export default function LoginPage() {
       <div className={s.card}>
         <div className={s.brandRow}>
           <Image
-            src={logo}
+            src={hosptial_logo}
             alt="SMH"
             width={40}
             height={40}
@@ -60,8 +59,7 @@ export default function LoginPage() {
               marginTop: ".75rem",
               borderColor: "var(--danger)",
               color: "var(--danger)",
-              background:
-                "color-mix(in oklab, var(--danger), white 90%)",
+              background: "color-mix(in oklab, var(--danger), white 90%)",
             }}
           >
             {err}
@@ -81,6 +79,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              autoComplete="username"
             />
           </div>
 
@@ -97,6 +96,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                autoComplete="current-password"
               />
               <button
                 type="button"
@@ -121,7 +121,6 @@ export default function LoginPage() {
             {loading ? "Signing in..." : "Sign in"}
           </button>
 
-          {/* Optional download button using brand gray outline */}
           <a href="/smh-app.apk" download className={s.btnOutlineSecondary}>
             Download App
           </a>
